@@ -1,0 +1,138 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: arial, sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: #444;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: none;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  color: #fff;
+  text-shadow: 0 0 30px #f00, 0 0 30px #f00, 0 0 30px #f00, 0 0 30px #f00;
+}
+
+#startButton, #endButton {
+  transition: transform 0.5s;
+}
+
+#startButton:hover, #endButton:hover {
+  transform: scale(1.05);
+}
+
+#endDiv {
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.56);
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+#startDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -240px 0 0 -97px;
+}
+
+#endeInhalt {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -97.5px;
+  margin-top: -181px;
+}
+
+label {
+  display: block;
+  margin: 20px 0;
+}
+
+#gameSettings {
+  background-color: #fff;
+  border: 1px solid #444;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -169px 0 0 -82px;
+  padding: 0px 10px 10px 10px;
+  z-index: 1000;
+  display: none;
+  text-decoration: none;
+  color: #444;
+}
+
+#buttonDiv {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: 0 0 0 -98.5px;
+  z-index: 1000;
+}
+
+img {
+  display: block;
+  margin: 10px auto;
+}
+
+#close {
+  display: block;
+  font-size: 2rem;
+  text-align: right;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+label[for="geschwindigkeit_start"] {
+  margin-top: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #444;
+}
+
+noscript {
+  border: 1px solid #444;
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -288px 0 0 -250px;
+  z-index: 10000;
+}
+
+#congratulation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: calc(50% + 120px);
+  margin-top: calc(50% - 600px);
+  display: none;
+  color: #fff;
+  z-index: 300;
+}
+
+#spielfeld {
+
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>Snake online</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body id="body">
+    <table id="spielfeld"></table>
+    <div id="startDiv">
+      <h1>Spiel starten</h1>
+      <img src="images/start.svg" width="150" height="150" alt="Spiel starten" id="startButton">
+    </div>
+    <div id="endDiv">
+      <div id="endeInhalt">
+        <h1>GAME OVER</h1>
+        <img src="images/restart.svg" width="150" height="150" alt="Spiel neu starten" id="endButton">
+        <p id="statistik"></p>
+      </div>
+    </div>
+
+    <p id="congratulation"><img width="200" src="images/pokal.png" alt="Neuer Highscore"></p>
+
+    <div id="buttonDiv">
+      <button id="expert">Erweiterte Einstellungen</button>
+    </div>
+
+    <form id="gameSettings">
+      <a href="#" id="close">&times;</a>
+      <label for="geschwindigkeit_start">Geschwindigkeit</label>
+      <input type="range" min="60" max="700" id="geschwindigkeit_start">
+      <label for="anzPflaumen_start">Anzahl der Pflaumen</label>
+      <input type="number" value="5" min="0" max="15" id="anzPflaumen_start">
+      <label for="hoehe_start">Höhe der Welt</label>
+      <input type="number" value="10" id="hoehe_start" min="5" max="30">
+      <label for="breite_start">Breite der Welt</label>
+      <input type="number" value="20" id="breite_start" min="5" max="30">
+    </form>
+
+    <script src="objekte.js"></script>
+    <script src="script.js"></script>
+
+    <noscript>
+      <img src="images/warning_klein.png" alt="Warnschild">
+      <p>
+        JavaScript ist ihn Ihrem Browser deaktiviert.<br>Bitte aktivieren Sie JavaScript um dieses Spiel spielen zu können.
+      </p>
+    </noscript>
+  </body>
+</html>
