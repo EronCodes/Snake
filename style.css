@@ -14,6 +14,11 @@ table {
   border-collapse: collapse;
 }
 
+table img {
+  padding: 0;
+  margin: 0;
+}
+
 td {
   border: none;
   width: 50px;

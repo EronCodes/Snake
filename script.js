@@ -137,14 +137,17 @@ function setupGrafik() {
   for(var i=0; i<zellen.length; i++) {
     zellen[i].style.backgroundColor = "#0a0";
     zellen[i].style.backgroundImage = "none";
+    zellen[i].innerHTML = "";
   }
 
   var fruchtFeld = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-  fruchtFeld.style.backgroundImage = "url(images/apfel.jpg)";
+  //fruchtFeld.style.backgroundImage = "url(images/apfel.jpg)";
+  fruchtFeld.innerHTML = '<img src="images/apfel.jpg" alt="Apfel">';
 
   for(var v=0; v<pflaumenPoses.length; v++) {
     var pflaumenFeld = document.getElementById(pflaumenPoses[v][0] + "_" + pflaumenPoses[v][1]);
-    pflaumenFeld.style.backgroundImage = "url(images/pflaume.jpg)";
+    //pflaumenFeld.style.backgroundImage = "url(images/pflaume.jpg)";
+    pflaumenFeld.innerHTML = '<img src="images/pflaume.jpg" alt="Pflaume">';
   }
 
   for (var k=0; k<snake.besetzteFelder.length; k++) {
@@ -163,7 +166,8 @@ function setupGrafik() {
   }
 
   var kopfFeld = document.getElementById(snake.besetzteFelder[snake.besetzteFelder.length-1][0] + "_" + snake.besetzteFelder[snake.besetzteFelder.length-1][1]);
-  kopfFeld.style.backgroundImage = "url(images/kopf_" + snake.orientation + ".png)";
+  //kopfFeld.style.backgroundImage = "url(images/kopf_" + snake.orientation + ".png)";
+  kopfFeld.innerHTML = '<img src="images/kopf_' + snake.orientation + '.png" alt="Kopf">';
 }
 
 function tasteGedrueckt(event) {
