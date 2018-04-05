@@ -7,6 +7,8 @@ var zeit1;
 
 var geschwindigkeit;
 
+var paused = false;
+
 var pflaumenPoses = [];
 
 var snake = {

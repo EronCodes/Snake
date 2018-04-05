@@ -133,6 +133,14 @@ noscript {
   z-index: 300;
 }
 
-#spielfeld {
+#pause {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  padding: 0;
+}
 
+#pause img {
+  margin: 0;
+  padding: 0;
 }

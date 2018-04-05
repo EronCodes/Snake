@@ -2,6 +2,18 @@ document.onkeydown = tasteGedrueckt;
 document.getElementById("startButton").addEventListener("click", spielStarten);
 document.getElementById("expert").addEventListener("click", openExpert);
 document.getElementById("close").addEventListener("click", closeExpert);
+document.getElementById("pause").addEventListener("click", pause);
+
+function pause() {
+  if (paused == false) {
+    clearInterval(intervalId);
+    paused = true;
+  } else {
+    paused = false;
+    geschwindigkeit = document.getElementById("geschwindigkeit_start").value;
+    intervalId = setInterval(setupBewegungswerte, geschwindigkeit);
+  }
+}
 
 function closeExpert() {
   document.getElementById("gameSettings").style.display = "none";
@@ -23,6 +35,7 @@ function spielStarten() {
 
   feldBreite = document.getElementById("breite_start").value;
   feldHoehe = document.getElementById("hoehe_start").value;
+  paused = false;
 
   snake.besetzteFelder = [
     [0, 0],
@@ -53,7 +66,6 @@ function spielStarten() {
   }
 
   geschwindigkeit = document.getElementById("geschwindigkeit_start").value;
-
   intervalId = setInterval(setupBewegungswerte, geschwindigkeit);
 }
 
@@ -158,19 +170,21 @@ function tasteGedrueckt(event) {
   event.cancelBubble = true;
   event.returnValue = false;
 
-  switch (event.keyCode) {
-    case 37: //links
-      snake.orientation = 3;
-      break;
-    case 38: //oben
-      snake.orientation = 0;
-      break;
-    case 39: //rechts
-      snake.orientation = 1;
-      break;
-    case 40: //unten
-      snake.orientation = 2;
-      break;
+  if(paused == false) {
+    switch (event.keyCode) {
+      case 37: //links
+        snake.orientation = 3;
+        break;
+      case 38: //oben
+        snake.orientation = 0;
+        break;
+      case 39: //rechts
+        snake.orientation = 1;
+        break;
+      case 40: //unten
+        snake.orientation = 2;
+        break;
+    }
   }
 
   return event.returnValue;
