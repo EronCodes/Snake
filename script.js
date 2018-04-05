@@ -281,12 +281,13 @@ function spielBeenden() {
     var wertissimo = [];
 
     for (var i = 0; i < localStorage.length; i++) {
-      wertissimo[i] = localStorage.getItem(localStorage.key(i));
+      if(localStorage.key(i).substring(0, 18) == "Snake_Ivo_Ziesche_")
+        wertissimo[i] = localStorage.getItem(localStorage.key(i));
     }
 
     var aktZeit = new Date();
     var zeit = aktZeit.getTime();
-    localStorage.setItem(zeit, snake.besetzteFelder.length-4);
+    localStorage.setItem("Snake_Ivo_Ziesche_" + zeit, snake.besetzteFelder.length-4);
 
     var platzierung = calcPlace(wertissimo, snake.besetzteFelder.length-4);
     var highscore = calcHighscore(wertissimo);
