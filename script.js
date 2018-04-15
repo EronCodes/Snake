@@ -277,12 +277,15 @@ function spielBeenden() {
   var spieldauer = (zeit2 - zeit1)/1000;
   var statistik = document.getElementById("statistik");
 
-  if (window["localStorage"]) {
+  if (window.localStorage) {
     var wertissimo = [];
 
+    var noSnakeElements = 0;
     for (var i = 0; i < localStorage.length; i++) {
       if(localStorage.key(i).substring(0, 18) == "Snake_Ivo_Ziesche_")
-        wertissimo[i] = localStorage.getItem(localStorage.key(i));
+        wertissimo[i-noSnakeElements] = localStorage.getItem(localStorage.key(i));
+      else
+        noSnakeElements++;
     }
 
     var aktZeit = new Date();
