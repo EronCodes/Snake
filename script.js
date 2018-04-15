@@ -116,20 +116,13 @@ function tabelleErstellen() {
 
   for(var i=0; i<feldHoehe; i++) {
     var tr = document.createElement("tr");
+    for (var k = 0; k < feldBreite; k++) {
+      var td = document.createElement("td");
+      td.setAttribute("id", k + "_" + i);
+      tr.appendChild(td);
+    }
     tabelle.appendChild(tr);
   }
-
-  var reihen = document.getElementsByTagName("tr");
-  for(var k=0; k<feldHoehe; k++) {
-    for(var u=0; u<feldBreite; u++) {
-      var td = document.createElement("td");
-      td.setAttribute("id", u + "_" + k);
-      reihen[k].appendChild(td);
-    }
-  }
-
-  var body = document.getElementById("body");
-  body.appendChild(tabelle);
 }
 
 function setupGrafik() {
