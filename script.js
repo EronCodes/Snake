@@ -182,6 +182,10 @@ function tasteGedrueckt(event) {
     }
   }
 
+  if (event.keyCode == 13) {
+    pause();
+  }
+
   return event.returnValue;
 }
 
