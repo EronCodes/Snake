@@ -132,17 +132,14 @@ function setupGrafik() {
   var zellen = document.getElementsByTagName("td");
   for(var i=0; i<zellen.length; i++) {
     zellen[i].style.backgroundColor = "#0a0";
-    zellen[i].style.backgroundImage = "none";
     zellen[i].innerHTML = "";
   }
 
   var fruchtFeld = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-  //fruchtFeld.style.backgroundImage = "url(images/apfel.jpg)";
   fruchtFeld.innerHTML = '<img src="images/apfel.jpg" alt="Apfel">';
 
   for(var v=0; v<pflaumenPoses.length; v++) {
     var pflaumenFeld = document.getElementById(pflaumenPoses[v][0] + "_" + pflaumenPoses[v][1]);
-    //pflaumenFeld.style.backgroundImage = "url(images/pflaume.jpg)";
     pflaumenFeld.innerHTML = '<img src="images/pflaume.jpg" alt="Pflaume">';
   }
 
@@ -155,14 +152,12 @@ function setupGrafik() {
     if((snake.besetzteFelder[k][0] == snake.fruchtPos[0]) && (snake.besetzteFelder[k][1] == snake.fruchtPos[1])) {
       snake.gefressen = true;
       var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-      apfel.style.backgroundImage = "none";
       apfel.style.backgroundColor = "#00f";
       fruchtErzeugen();
     }
   }
 
   var kopfFeld = document.getElementById(snake.besetzteFelder[snake.besetzteFelder.length-1][0] + "_" + snake.besetzteFelder[snake.besetzteFelder.length-1][1]);
-  //kopfFeld.style.backgroundImage = "url(images/kopf_" + snake.orientation + ".png)";
   kopfFeld.innerHTML = '<img src="images/kopf_' + snake.orientation + '.png" alt="Kopf">';
 }
 
