@@ -110,6 +110,10 @@ function addPflaume(k) {
       return;
     }
   }
+       //Liegt Snakes Kopf auf Anfangsposition?                                                                                        //Liegt dort die Pflaume?
+  if ((snake.besetzteFelder[snake.besetzteFelder.length-1][0] == 3 && snake.besetzteFelder[snake.besetzteFelder.length-1][1] == 0) && (pflaumenPoses[k][0] == 4 && pflaumenPoses[k][1] == 0)) {
+    addPflaume(k);
+  }
 }
 
 function tabelleErstellen() {
