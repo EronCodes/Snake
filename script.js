@@ -177,6 +177,9 @@ function setupGrafik() {
       var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
       apfel.style.backgroundColor = "#00f";
       fruchtErzeugen();
+      if (document.getElementById("pflaumenAdd").checked) {
+        addPflaume(pflaumenPoses.length);
+      }
     }
   }
 
