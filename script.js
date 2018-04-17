@@ -91,31 +91,6 @@ function pflaumeErzeugen() {
   for (var i = 0; i < number; i++) {
     addPflaume(i);
   }
-
-  /*for (var k = 0; k < number; k++) {
-    pflaumenPoses[k] = [Math.floor(Math.random()*feldBreite), Math.floor(Math.random()*feldHoehe)];
-    //liegt eine Pflaume auf einer Pflaume?
-    for (var t = 0; t < pflaumenPoses.length-1; t++) {
-      if (pflaumenPoses[pflaumenPoses.length-1][0] == pflaumenPoses[t][0] && pflaumenPoses[pflaumenPoses.length-1][1] == pflaumenPoses[t][1]) {
-        pflaumeErzeugen();
-        return;
-      }
-    }
-  }
-
-  for(var u=0; u<pflaumenPoses.length; u++) {
-    for (var i = 0; i < snake.besetzteFelder.length; i++) {
-      //Liegt eine Pflaume auf Snake?
-      if((snake.besetzteFelder[i][0] == pflaumenPoses[u][0]) && (snake.besetzteFelder[i][1] == pflaumenPoses[u][1])) {
-        pflaumeErzeugen();
-        return;
-      }
-    }
-    if (pflaumenPoses[u][0] == 4 && pflaumenPoses[u][1] == 0) {
-      pflaumeErzeugen();
-      return;
-    }
-  }*/
 }
 
 function addPflaume(k) {
