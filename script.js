@@ -32,6 +32,10 @@ function spielStarten() {
   var congratulation = document.getElementById("congratulation");
   congratulation.style.display = "none";
 
+  var counter = document.getElementById("counter");
+  counter.innerHTML = '0 <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
+  counter.style.display = "block";
+
   while(feld.hasChildNodes())
     feld.removeChild(feld.firstChild);
 
@@ -153,8 +157,10 @@ function setupGrafik() {
     //Hat Snake einen Apfel gefressen?
     if((snake.besetzteFelder[k][0] == snake.fruchtPos[0]) && (snake.besetzteFelder[k][1] == snake.fruchtPos[1])) {
       snake.gefressen = true;
+      aepfel++;
       var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
       apfel.style.backgroundColor = "#00f";
+      document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
       fruchtErzeugen();
       if (document.getElementById("pflaumenAdd").checked) {
         addPflaume(pflaumenPoses.length);
@@ -305,9 +311,9 @@ function spielBeenden() {
       congratulation.style.display = "block";
     }
 
-    gameValues = snake.besetzteFelder.length-4 + " Äpfel" + "<br>" + spieldauer + " Sekunden<br>" + platzierung + " Platz insgesamt<br>" + highscore + " Äpfel Highscore";
+    gameValues = aepfel + " Äpfel" + "<br>" + spieldauer + " Sekunden<br>" + platzierung + " Platz insgesamt<br>" + highscore + " Äpfel Highscore";
   } else {
-    gameValues = snake.besetzteFelder.length-4 + " Äpfel<br>" + spieldauer + " Sekunden";
+    gameValues = aepfel + " Äpfel<br>" + spieldauer + " Sekunden";
   }
 
   statistik.innerHTML = gameValues;

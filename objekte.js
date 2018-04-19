@@ -5,6 +5,8 @@ var feldHoehe = 10;
 
 var zeit1;
 
+var aepfel = 0;
+
 var geschwindigkeit;
 
 var paused = false;
