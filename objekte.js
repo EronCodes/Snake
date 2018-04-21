@@ -28,3 +28,10 @@ var snake = {
   */
     orientation: 1
 };
+
+var powerup = {
+  inGame: false,
+  waiting: 0,
+  timeLeft: 100,
+  pos: [5,5]
+};

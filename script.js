@@ -36,7 +36,7 @@ function spielStarten() {
   counter.innerHTML = '0 <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
   counter.style.display = "block";
 
-  while(feld.hasChildNodes())
+  while (feld.hasChildNodes())
     feld.removeChild(feld.firstChild);
 
   feldBreite = document.getElementById("breite_start").value;
@@ -68,7 +68,7 @@ function spielStarten() {
   snake.gefressen = false;
 
   var zellen = document.getElementsByTagName("td");
-  for(var i=0; i<zellen.length; i++) {
+  for (var i = 0; i < zellen.length; i++) {
     zellen[i].style.backgroundColor = "#505050";
   }
 
@@ -77,12 +77,12 @@ function spielStarten() {
 }
 
 function fruchtErzeugen() {
-  snake.fruchtPos[0] = Math.floor(Math.random()*feldBreite);
-  snake.fruchtPos[1] = Math.floor(Math.random()*feldHoehe);
+  snake.fruchtPos[0] = Math.floor(Math.random() * feldBreite);
+  snake.fruchtPos[1] = Math.floor(Math.random() * feldHoehe);
 
-  for(var t=0; t<pflaumenPoses.length; t++) {
+  for (var t = 0; t < pflaumenPoses.length; t++) {
     //Liegt der Apfel auf einer Pflaume?
-    if((snake.fruchtPos[0] == pflaumenPoses[t][0]) && (snake.fruchtPos[1] == pflaumenPoses[t][1])) {
+    if ((snake.fruchtPos[0] == pflaumenPoses[t][0]) && (snake.fruchtPos[1] == pflaumenPoses[t][1])) {
       fruchtErzeugen();
     }
   }
@@ -98,10 +98,10 @@ function pflaumeErzeugen() {
 }
 
 function addPflaume(k) {
-  pflaumenPoses[k] = [Math.floor(Math.random()*feldBreite), Math.floor(Math.random()*feldHoehe)];
+  pflaumenPoses[k] = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
   //liegt eine Pflaume auf einer Pflaume?
-  for (var t = 0; t < pflaumenPoses.length-1; t++) {
-    if (pflaumenPoses[pflaumenPoses.length-1][0] == pflaumenPoses[t][0] && pflaumenPoses[pflaumenPoses.length-1][1] == pflaumenPoses[t][1]) {
+  for (var t = 0; t < pflaumenPoses.length - 1; t++) {
+    if (pflaumenPoses[pflaumenPoses.length - 1][0] == pflaumenPoses[t][0] && pflaumenPoses[pflaumenPoses.length - 1][1] == pflaumenPoses[t][1]) {
       addPflaume(k);
       return;
     }
@@ -109,13 +109,13 @@ function addPflaume(k) {
 
   for (var i = 0; i < snake.besetzteFelder.length; i++) {
     //Liegt eine Pflaume auf Snake?
-    if((snake.besetzteFelder[i][0] == pflaumenPoses[k][0]) && (snake.besetzteFelder[i][1] == pflaumenPoses[k][1])) {
+    if ((snake.besetzteFelder[i][0] == pflaumenPoses[k][0]) && (snake.besetzteFelder[i][1] == pflaumenPoses[k][1])) {
       addPflaume(k);
       return;
     }
   }
-       //Liegt Snakes Kopf auf Anfangsposition?                                                                                        //Liegt dort die Pflaume?
-  if ((snake.besetzteFelder[snake.besetzteFelder.length-1][0] == 3 && snake.besetzteFelder[snake.besetzteFelder.length-1][1] == 0) && (pflaumenPoses[k][0] == 4 && pflaumenPoses[k][1] == 0)) {
+  //Liegt Snakes Kopf auf Anfangsposition?                                                                                        //Liegt dort die Pflaume?
+  if ((snake.besetzteFelder[snake.besetzteFelder.length - 1][0] == 3 && snake.besetzteFelder[snake.besetzteFelder.length - 1][1] == 0) && (pflaumenPoses[k][0] == 4 && pflaumenPoses[k][1] == 0)) {
     addPflaume(k);
   }
 }
@@ -123,7 +123,7 @@ function addPflaume(k) {
 function tabelleErstellen() {
   var tabelle = document.getElementById("spielfeld");
 
-  for(var i=0; i<feldHoehe; i++) {
+  for (var i = 0; i < feldHoehe; i++) {
     var tr = document.createElement("tr");
     for (var k = 0; k < feldBreite; k++) {
       var td = document.createElement("td");
@@ -135,40 +135,47 @@ function tabelleErstellen() {
 }
 
 function setupGrafik() {
+  //Grundiere/Resette Zellen
   var zellen = document.getElementsByTagName("td");
-  for(var i=0; i<zellen.length; i++) {
+  for (var i = 0; i < zellen.length; i++) {
     zellen[i].style.backgroundColor = "#0a0";
     zellen[i].innerHTML = "";
   }
 
+  //Zeichne Frucht
   var fruchtFeld = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
   fruchtFeld.innerHTML = '<img src="images/apfel.jpg" alt="Apfel">';
 
-  for(var v=0; v<pflaumenPoses.length; v++) {
+  //Zeichne Pflaumen
+  for (var v = 0; v < pflaumenPoses.length; v++) {
     var pflaumenFeld = document.getElementById(pflaumenPoses[v][0] + "_" + pflaumenPoses[v][1]);
     pflaumenFeld.innerHTML = '<img src="images/pflaume.jpg" alt="Pflaume">';
   }
 
-  for (var k=0; k<snake.besetzteFelder.length; k++) {
-    var id = snake.besetzteFelder[k];
-    var feld = document.getElementById(id[0]+"_"+id[1]);
-    feld.style.backgroundColor = "#00f";
-
-    //Hat Snake einen Apfel gefressen?
-    if((snake.besetzteFelder[k][0] == snake.fruchtPos[0]) && (snake.besetzteFelder[k][1] == snake.fruchtPos[1])) {
-      snake.gefressen = true;
-      aepfel++;
-      var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-      apfel.style.backgroundColor = "#00f";
-      document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
-      fruchtErzeugen();
-      if (document.getElementById("pflaumenAdd").checked) {
-        addPflaume(pflaumenPoses.length);
-      }
-    }
+  //Hat Snake einen Apfel gefressen?
+  if (snake.gefressen == true) {
+    var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
+    apfel.style.backgroundColor = "#00f";
+    document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
   }
 
-  var kopfFeld = document.getElementById(snake.besetzteFelder[snake.besetzteFelder.length-1][0] + "_" + snake.besetzteFelder[snake.besetzteFelder.length-1][1]);
+  //Zeichne Powerup
+  var powerupFeld = document.getElementById(powerup.pos[0] + '_' + powerup.pos[1]);
+  if (powerup.inGame == true) {
+    powerupFeld.innerHTML = '<img src="images/powerup_pflaume.jpg" width="50" alt="Pflaumen-Powerup">';
+  } else {
+    powerupFeld.innerHTML = '';
+  }
+
+  //Zeichne Snake
+  for (var k = 0; k < snake.besetzteFelder.length; k++) {
+    var id = snake.besetzteFelder[k];
+    var feld = document.getElementById(id[0] + "_" + id[1]);
+    feld.style.backgroundColor = "#00f";
+  }
+
+  //Zeichne Snakes Kopf
+  var kopfFeld = document.getElementById(snake.besetzteFelder[snake.besetzteFelder.length - 1][0] + "_" + snake.besetzteFelder[snake.besetzteFelder.length - 1][1]);
   kopfFeld.innerHTML = '<img src="images/kopf_' + snake.orientation + '.png" alt="Kopf">';
 }
 
@@ -176,7 +183,7 @@ function tasteGedrueckt(event) {
   event.cancelBubble = true;
   event.returnValue = false;
 
-  if(paused == false) {
+  if (paused == false) {
     switch (event.keyCode) {
       case 37: //links
         snake.orientation = 3;
@@ -201,11 +208,12 @@ function tasteGedrueckt(event) {
 }
 
 function setupBewegungswerte() {
-  if(snake.gefressen == false) {
+  if (snake.gefressen == false) {
     //Schwanzelement entfernen
     snake.besetzteFelder.shift();
-  }else {
+  } else {
     snake.gefressen = false;
+    fruchtErzeugen();
   }
 
   //temporäres Array, also Kopie von snake.besetzteFelder, erzeugen
@@ -238,10 +246,56 @@ function setupBewegungswerte() {
   }
   snake.besetzteFelder.push(ende);
 
-  if(todesPruefung())
+  if (powerup.inGame == false) {
+    if (powerup.waiting == 0) {
+      powerup.inGame = true;
+      powerup.timeLeft = 1900 /*Math.floor(Math.random()*5)+7*/ ;
+      setPowerup();
+    }
+  } else {
+    powerup.timeLeft--;
+    if (powerup.timeLeft == 0) {
+      deletePowerup();
+    }
+  }
+
+  for (var k = 0; k < snake.besetzteFelder.length; k++) {
+    //Hat Snake einen Apfel gefressen?
+    if ((snake.besetzteFelder[k][0] == snake.fruchtPos[0]) && (snake.besetzteFelder[k][1] == snake.fruchtPos[1])) {
+      snake.gefressen = true;
+      aepfel++;
+      if (powerup.inGame == false) {
+        powerup.waiting--;
+      }
+
+      if (document.getElementById("pflaumenAdd").checked) {
+        addPflaume(pflaumenPoses.length);
+      }
+    }
+  }
+
+  //Hat Snake das Powerup gefressen?
+  if (powerup.inGame == true && (snake.besetzteFelder[snake.besetzteFelder.length-1][0] == powerup.pos[0]) && (snake.besetzteFelder[snake.besetzteFelder.length-1][1] == powerup.pos[1])) {
+    deletePowerup();
+    pflaumenPoses = [];
+  }
+
+  if (todesPruefung())
     spielBeenden();
   else
     setupGrafik();
+}
+
+function setPowerup() {
+  powerup.pos = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
+  // TODO: Überprüfen, ob das Powerup auf einer Pflaume, auf Snake, oder auf dem Apfel liegt, dann neustarten
+  // TODO: Bei den ganzen anderen Erzeugungs-Funktionen hinzufügen, dass geprüft wird, ob es auf einem Powerup Liegt
+  // TODO: Da so viele Funktionen oft dasselbe überprüfen, nämlich ob irgendwas auf irgendwas liegt, für Apfel, Snake, Pflaumen und Powerup eine Funktion schreiben
+}
+
+function deletePowerup() {
+  powerup.inGame = false;
+  powerup.waiting = 0 /*Math.floor(Math.random()*5)+10*/ ;
 }
 
 function todesPruefung() {
@@ -251,20 +305,20 @@ function todesPruefung() {
   }
 
   //Snake auf Pflaume?
-  for(var t=0; t<pflaumenPoses.length; t++) {
-   if((tmpFelder[tmpFelder.length-1][0] == pflaumenPoses[t][0]) && (tmpFelder[tmpFelder.length-1][1] == pflaumenPoses[t][1]))
-     return true;
+  for (var t = 0; t < pflaumenPoses.length; t++) {
+    if ((tmpFelder[tmpFelder.length - 1][0] == pflaumenPoses[t][0]) && (tmpFelder[tmpFelder.length - 1][1] == pflaumenPoses[t][1]))
+      return true;
   }
 
-  var kopf = tmpFelder[tmpFelder.length-1];
+  var kopf = tmpFelder[tmpFelder.length - 1];
 
   //Snake außerhalb der Welt?
-  if (kopf[0] > feldBreite-1 || kopf[0] < 0 || kopf[1] < 0 || kopf[1] > feldHoehe-1)
+  if (kopf[0] > feldBreite - 1 || kopf[0] < 0 || kopf[1] < 0 || kopf[1] > feldHoehe - 1)
     return true;
 
   //Hat Snake sich selbst gefressen?
-  for(var z=0; z<tmpFelder.length-1; z++) {
-    if(kopf[0] == tmpFelder[z][0] && kopf[1] == tmpFelder[z][1])
+  for (var z = 0; z < tmpFelder.length - 1; z++) {
+    if (kopf[0] == tmpFelder[z][0] && kopf[1] == tmpFelder[z][1])
       return true;
   }
 
@@ -284,7 +338,7 @@ function spielBeenden() {
 
   var aktZeit2 = new Date();
   var zeit2 = aktZeit2.getTime();
-  var spieldauer = (zeit2 - zeit1)/1000;
+  var spieldauer = (zeit2 - zeit1) / 1000;
   var statistik = document.getElementById("statistik");
 
   if (window.localStorage) {
@@ -292,17 +346,17 @@ function spielBeenden() {
 
     var noSnakeElements = 0;
     for (var i = 0; i < localStorage.length; i++) {
-      if(localStorage.key(i).substring(0, 18) == "Snake_Ivo_Ziesche_")
-        wertissimo[i-noSnakeElements] = localStorage.getItem(localStorage.key(i));
+      if (localStorage.key(i).substring(0, 18) == "Snake_Ivo_Ziesche_")
+        wertissimo[i - noSnakeElements] = localStorage.getItem(localStorage.key(i));
       else
         noSnakeElements++;
     }
 
     var aktZeit = new Date();
     var zeit = aktZeit.getTime();
-    localStorage.setItem("Snake_Ivo_Ziesche_" + zeit, snake.besetzteFelder.length-4);
+    localStorage.setItem("Snake_Ivo_Ziesche_" + zeit, snake.besetzteFelder.length - 4);
 
-    var platzierung = calcPlace(wertissimo, snake.besetzteFelder.length-4);
+    var platzierung = calcPlace(wertissimo, snake.besetzteFelder.length - 4);
     var highscore = calcHighscore(wertissimo);
 
     //Erster Platz?
@@ -321,8 +375,8 @@ function spielBeenden() {
 
 function calcPlace(werte, aktWert) {
   var platz = 0;
-  for(var i=0; i<werte.length; i++) {
-    if(aktWert > werte[i])
+  for (var i = 0; i < werte.length; i++) {
+    if (aktWert > werte[i])
       platz++;
   }
 
