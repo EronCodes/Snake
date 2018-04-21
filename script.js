@@ -184,7 +184,7 @@ function setupBewegungswerte() {
   if (powerup.inGame == false) {
     if (powerup.waiting == 0) {
       powerup.inGame = true;
-      powerup.timeLeft = 1900 /*Math.floor(Math.random()*5)+7*/ ;
+      powerup.timeLeft = Math.floor(Math.random()*5)+7;
       setPowerup();
     }
   } else {
@@ -362,7 +362,7 @@ function setupBewegungswerte() {
 
   function deletePowerup() {
     powerup.inGame = false;
-    powerup.waiting = 0 /*Math.floor(Math.random()*5)+10*/ ;
+    powerup.waiting = Math.floor(Math.random()*5)+10;
   }
 }
 
