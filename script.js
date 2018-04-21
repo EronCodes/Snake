@@ -80,11 +80,8 @@ function fruchtErzeugen() {
   snake.fruchtPos[0] = Math.floor(Math.random() * feldBreite);
   snake.fruchtPos[1] = Math.floor(Math.random() * feldHoehe);
 
-  for (var t = 0; t < pflaumenPoses.length; t++) {
-    //Liegt der Apfel auf einer Pflaume?
-    if ((snake.fruchtPos[0] == pflaumenPoses[t][0]) && (snake.fruchtPos[1] == pflaumenPoses[t][1])) {
-      fruchtErzeugen();
-    }
+  if (posOnPflaume(snake.fruchtPos[0], snake.fruchtPos[1]) == true || posOnPowerup(snake.fruchtPos[0], snake.fruchtPos[1]) == true || posOnSnake(snake.fruchtPos[0], snake.fruchtPos[1]) == true) {
+    fruchtErzeugen();
   }
 }
 
@@ -99,22 +96,12 @@ function pflaumeErzeugen() {
 
 function addPflaume(k) {
   pflaumenPoses[k] = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
-  //liegt eine Pflaume auf einer Pflaume?
-  for (var t = 0; t < pflaumenPoses.length - 1; t++) {
-    if (pflaumenPoses[pflaumenPoses.length - 1][0] == pflaumenPoses[t][0] && pflaumenPoses[pflaumenPoses.length - 1][1] == pflaumenPoses[t][1]) {
-      addPflaume(k);
-      return;
-    }
+
+  if (posOnSnake(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnApfel(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnPowerup(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true) {
+    addPflaume(k);
   }
 
-  for (var i = 0; i < snake.besetzteFelder.length; i++) {
-    //Liegt eine Pflaume auf Snake?
-    if ((snake.besetzteFelder[i][0] == pflaumenPoses[k][0]) && (snake.besetzteFelder[i][1] == pflaumenPoses[k][1])) {
-      addPflaume(k);
-      return;
-    }
-  }
-  //Liegt Snakes Kopf auf Anfangsposition?                                                                                        //Liegt dort die Pflaume?
+       //Liegt Snakes Kopf auf Anfangsposition?                                                                                                 //Liegt dort die Pflaume?
   if ((snake.besetzteFelder[snake.besetzteFelder.length - 1][0] == 3 && snake.besetzteFelder[snake.besetzteFelder.length - 1][1] == 0) && (pflaumenPoses[k][0] == 4 && pflaumenPoses[k][1] == 0)) {
     addPflaume(k);
   }
@@ -288,9 +275,10 @@ function setupBewegungswerte() {
 
 function setPowerup() {
   powerup.pos = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
-  // TODO: Überprüfen, ob das Powerup auf einer Pflaume, auf Snake, oder auf dem Apfel liegt, dann neustarten
-  // TODO: Bei den ganzen anderen Erzeugungs-Funktionen hinzufügen, dass geprüft wird, ob es auf einem Powerup Liegt
-  // TODO: Da so viele Funktionen oft dasselbe überprüfen, nämlich ob irgendwas auf irgendwas liegt, für Apfel, Snake, Pflaumen und Powerup eine Funktion schreiben
+
+  if (posOnApfel(powerup.pos[0], powerup.pos[1]) == true || posOnSnake(powerup.pos[0], powerup.pos[1]) == true || posOnPflaume(powerup.pos[0], powerup.pos[1]) == true) {
+    setPowerup();
+  }
 }
 
 function deletePowerup() {
@@ -393,4 +381,34 @@ function calcHighscore(wertissimo) {
   }
 
   return bigger;
+}
+
+function posOnSnake(x, y) {
+  for (var i = 0; i < snake.besetzteFelder.length; i++) {
+    if ((snake.besetzteFelder[i][0] == x) && (snake.besetzteFelder[i][1] == y)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function posOnPflaume(x, y) {
+  for (var t = 0; t < pflaumenPoses.length - 1; t++) {
+    if (pflaumenPoses[t][0] == x && pflaumenPoses[t][1] == y) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function posOnApfel(x, y) {
+  if (snake.fruchtPos[0] == x && snake.fruchtPos[1] == y)
+      return true;
+  return false;
+}
+
+function posOnPowerup(x, y) {
+  if (powerup.pos[0] == x && powerup.pos[1] == y)
+      return true;
+  return false;
 }
