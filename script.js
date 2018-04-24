@@ -151,6 +151,9 @@ function setupBewegungswerte() {
   } else {
     snake.gefressen = false;
     fruchtErzeugen();
+    if (document.getElementById("pflaumenAdd").checked) {
+      addPflaume(pflaumenPoses.length);
+    }
   }
 
   //temporäres Array, also Kopie von snake.besetzteFelder, erzeugen
@@ -187,7 +190,7 @@ function setupBewegungswerte() {
     if (powerup.inGame == false) {
       if (powerup.waiting == 0) {
         powerup.inGame = true;
-        powerup.timeLeft = /*Math.floor(Math.random() * 5) + 7*/10000;
+        powerup.timeLeft = Math.floor(Math.random() * 5) + 7;
         setPowerup();
       }
     } else {
@@ -205,10 +208,6 @@ function setupBewegungswerte() {
       aepfel++;
       if (powerup.inGame == false) {
         powerup.waiting--;
-      }
-
-      if (document.getElementById("pflaumenAdd").checked) {
-        addPflaume(pflaumenPoses.length);
       }
     }
   }
@@ -367,7 +366,7 @@ function setPowerup() {
 
 function deletePowerup() {
   powerup.inGame = false;
-  powerup.waiting = /*Math.floor(Math.random() * 5) + 10*/0;
+  powerup.waiting = Math.floor(Math.random() * 5) + 10;
 }
 
 //Expert-Window-Functions and the pause-funktion
