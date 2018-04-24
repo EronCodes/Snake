@@ -95,11 +95,13 @@ function setupGrafik() {
   }
 
   //Zeichne Powerup
-  var powerupFeld = document.getElementById(powerup.pos[0] + '_' + powerup.pos[1]);
-  if (powerup.inGame == true) {
-    powerupFeld.innerHTML = '<img src="images/powerup_pflaume.jpg" width="50" alt="Pflaumen-Powerup">';
-  } else {
-    powerupFeld.innerHTML = '';
+  if (document.getElementById("powerup").checked) {
+    var powerupFeld = document.getElementById(powerup.pos[0] + '_' + powerup.pos[1]);
+    if (powerup.inGame == true) {
+      powerupFeld.innerHTML = '<img src="images/powerup_pflaume.jpg" width="50" alt="Pflaumen-Powerup">';
+    } else {
+      powerupFeld.innerHTML = '';
+    }
   }
 
   //Zeichne Snake
@@ -181,16 +183,18 @@ function setupBewegungswerte() {
   }
   snake.besetzteFelder.push(ende);
 
-  if (powerup.inGame == false) {
-    if (powerup.waiting == 0) {
-      powerup.inGame = true;
-      powerup.timeLeft = Math.floor(Math.random() * 5) + 7;
-      setPowerup();
-    }
-  } else {
-    powerup.timeLeft--;
-    if (powerup.timeLeft == 0) {
-      deletePowerup();
+  if (document.getElementById("powerup").checked) {
+    if (powerup.inGame == false) {
+      if (powerup.waiting == 0) {
+        powerup.inGame = true;
+        powerup.timeLeft = /*Math.floor(Math.random() * 5) + 7*/10000;
+        setPowerup();
+      }
+    } else {
+      powerup.timeLeft--;
+      if (powerup.timeLeft == 0) {
+        deletePowerup();
+      }
     }
   }
 
@@ -210,9 +214,11 @@ function setupBewegungswerte() {
   }
 
   //Hat Snake das Powerup gefressen?
-  if (powerup.inGame == true && (snake.besetzteFelder[snake.besetzteFelder.length - 1][0] == powerup.pos[0]) && (snake.besetzteFelder[snake.besetzteFelder.length - 1][1] == powerup.pos[1])) {
-    deletePowerup();
-    pflaumenPoses = [];
+  if (document.getElementById("powerup").checked) {
+    if (powerup.inGame == true && (snake.besetzteFelder[snake.besetzteFelder.length - 1][0] == powerup.pos[0]) && (snake.besetzteFelder[snake.besetzteFelder.length - 1][1] == powerup.pos[1])) {
+      deletePowerup();
+      pflaumenPoses = [];
+    }
   }
 
   if (todesPruefung())
@@ -361,7 +367,7 @@ function setPowerup() {
 
 function deletePowerup() {
   powerup.inGame = false;
-  powerup.waiting = Math.floor(Math.random() * 5) + 10;
+  powerup.waiting = /*Math.floor(Math.random() * 5) + 10*/0;
 }
 
 //Expert-Window-Functions and the pause-funktion
@@ -385,7 +391,6 @@ function closeExpert() {
 function openExpert() {
   document.getElementById("gameSettings").style.display = "block";
 }
-
 
 //posOn... - functions
 function posOnSnake(x, y) {

@@ -82,7 +82,7 @@ label[for="geschwindigkeit_start"] {
   margin-top: 5px;
 }
 
-#pflaumenAdd, label[for="pflaumenAdd"] {
+#pflaumenAdd, label[for="pflaumenAdd"], #powerup, label[for="powerup"] {
   display: inline;
 }
 
