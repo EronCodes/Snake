@@ -69,11 +69,11 @@ function deletePowerup() {
 function pause() {
   if (paused == false) {
     clearInterval(intervalId);
-    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/play.png" width="30">';
+    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/play.svg" width="30">';
     paused = true;
   } else {
     paused = false;
-    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/pause.png" width="30">';
+    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/pause.svg" width="30">';
     geschwindigkeit = document.getElementById("geschwindigkeit_start").value;
     intervalId = setInterval(setupBewegungswerte, geschwindigkeit);
   }

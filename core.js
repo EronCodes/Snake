@@ -6,7 +6,7 @@ function spielStarten() {
   congratulation.style.display = "none";
 
   var counter = document.getElementById("counter");
-  counter.innerHTML = '0 <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
+  counter.innerHTML = '0 <img src="images/apple.svg" alt="Äpfel" width="50">';
   counter.style.display = "block";
 
   while (feld.hasChildNodes())
@@ -15,6 +15,8 @@ function spielStarten() {
   feldBreite = document.getElementById("breite_start").value;
   feldHoehe = document.getElementById("hoehe_start").value;
   paused = false;
+
+  aepfel = 0;
 
   snake.besetzteFelder = [
     [0, 0],
@@ -73,33 +75,33 @@ function setupGrafik() {
 
   //Zeichne Frucht
   var fruchtFeld = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-  fruchtFeld.innerHTML = '<img src="images/apfel.jpg" alt="Apfel">';
+  fruchtFeld.innerHTML = '<img src="images/apple.svg" alt="Apfel">';
 
   //Zeichne Pflaumen
   for (var v = 0; v < pflaumenPoses.length; v++) {
     var pflaumenFeld = document.getElementById(pflaumenPoses[v][0] + "_" + pflaumenPoses[v][1]);
-    pflaumenFeld.innerHTML = '<img src="images/pflaume.jpg" alt="Pflaume">';
+    pflaumenFeld.innerHTML = '<img src="images/plum.svg" alt="Pflaume">';
   }
 
   //Hat Snake einen Apfel gefressen?
   if (snake.gefressen == true) {
     var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
     apfel.style.backgroundColor = "#00f";
-    document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apfel_counter.jpg" alt="Äpfel" width="50">';
+    document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apple.svg" alt="Äpfel" width="50">';
   }
 
   //Zeichne Powerup
   if (document.getElementById("powerup").checked) {
     var powerupFeld = document.getElementById(powerup.pos[0] + '_' + powerup.pos[1]);
     if (powerup.inGame == true) {
-      powerupFeld.innerHTML = '<img src="images/powerup_pflaume.jpg" width="50" alt="Pflaumen-Powerup">';
+      powerupFeld.innerHTML = '<img src="images/powerup.svg" width="50" alt="Pflaumen-Powerup">';
     } else {
       powerupFeld.innerHTML = '';
     }
   }
 
   //Zeichne Snake
-  for (var k = 0; k < snake.besetzteFelder.length; k++) {
+  for (var k = 0; k < snake.besetzteFelder.length-1; k++) {
     var id = snake.besetzteFelder[k];
     var feld = document.getElementById(id[0] + "_" + id[1]);
     feld.style.backgroundColor = "#00f";
@@ -107,7 +109,7 @@ function setupGrafik() {
 
   //Zeichne Snakes Kopf
   var kopfFeld = document.getElementById(snake.besetzteFelder[snake.besetzteFelder.length - 1][0] + "_" + snake.besetzteFelder[snake.besetzteFelder.length - 1][1]);
-  kopfFeld.innerHTML = '<img src="images/kopf_' + snake.orientation + '.png" alt="Kopf">';
+  kopfFeld.innerHTML = '<img src="images/kopf_' + snake.orientation + '.svg" alt="Kopf">';
 }
 
 function tasteGedrueckt(event) {
