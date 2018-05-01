@@ -1,3 +1,26 @@
+initCss();
+
+function initCss() {
+  var expert = document.getElementById("gameSettings");
+  var start = document.getElementById("startDiv");
+  var end = document.getElementById("endDiv");
+  var congratulation = document.getElementById("congratulation");
+
+  expert.style.marginLeft = expert.offsetWidth/-2 + "px";
+  expert.style.marginTop = expert.offsetHeight/-2 + "px";
+  expert.style.display = "none";
+
+  start.style.marginLeft = start.offsetWidth/-2 + "px";
+  start.style.marginTop = start.offsetHeight/-2 + "px";
+
+  end.style.marginLeft = end.offsetWidth/-2 + "px";
+  end.style.marginTop = end.offsetHeight/-2 + "px";
+  end.style.display = "none";
+
+  congratulation.style.marginTop = congratulation.offsetHeight/-2 + "px";
+  congratulation.style.display = "none";
+}
+
 function spielStarten() {
   document.getElementById("buttonDiv").style.display = "none";
   var feld = document.getElementById("spielfeld");
