@@ -54,6 +54,13 @@ function spielStarten() {
     [3, 0]
   ];
 
+  powerup = {
+    inGame: false,
+    waiting: 0,
+    timeLeft: 100,
+    pos: [5,5]
+  };
+
   pflaumeErzeugen();
   fruchtErzeugen();
 
