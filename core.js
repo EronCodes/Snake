@@ -4,6 +4,7 @@ document.getElementById("expert").addEventListener("click", openExpert);
 document.getElementById("close").addEventListener("click", closeExpert);
 document.getElementById("pause").addEventListener("click", pause);
 document.getElementById("powerup").addEventListener("click", setPflaumeSteigt);
+document.getElementById("pflaumenAdd").addEventListener("click", setPowerupUnchecked);
 
 initCss();
 
@@ -392,6 +393,12 @@ function addPflaume(k) {
 function setPflaumeSteigt() {
   if (document.getElementById("powerup").checked) {
     document.getElementById("pflaumenAdd").checked = true;
+  }
+}
+
+function setPowerupUnchecked() {
+  if (!document.getElementById("pflaumenAdd").checked) {
+    document.getElementById("powerup").checked = false;
   }
 }
 
