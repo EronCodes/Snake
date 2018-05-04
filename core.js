@@ -362,7 +362,7 @@ function fruchtErzeugen() {
   snake.fruchtPos[0] = Math.floor(Math.random() * feldBreite);
   snake.fruchtPos[1] = Math.floor(Math.random() * feldHoehe);
 
-  if (posOnPflaume(snake.fruchtPos[0], snake.fruchtPos[1]) == true || posOnPowerup(snake.fruchtPos[0], snake.fruchtPos[1]) == true || posOnSnake(snake.fruchtPos[0], snake.fruchtPos[1]) == true) {
+  if (posOnPflaume(snake.fruchtPos[0], snake.fruchtPos[1], false) == true || posOnPowerup(snake.fruchtPos[0], snake.fruchtPos[1]) == true || posOnSnake(snake.fruchtPos[0], snake.fruchtPos[1]) == true) {
     fruchtErzeugen();
   }
 }
@@ -379,7 +379,7 @@ function pflaumeErzeugen() {
 function addPflaume(k) {
   pflaumenPoses[k] = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
 
-  if (posOnSnake(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnApfel(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnPowerup(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true) {
+  if (posOnSnake(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnApfel(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnPowerup(pflaumenPoses[k][0], pflaumenPoses[k][1]) == true || posOnPflaume(pflaumenPoses[k][0], pflaumenPoses[k][1], true) == true) {
     addPflaume(k);
   }
 
@@ -398,7 +398,7 @@ function setPflaumeSteigt() {
 function setPowerup() {
   powerup.pos = [Math.floor(Math.random() * feldBreite), Math.floor(Math.random() * feldHoehe)];
 
-  if (posOnApfel(powerup.pos[0], powerup.pos[1]) == true || posOnSnake(powerup.pos[0], powerup.pos[1]) == true || posOnPflaume(powerup.pos[0], powerup.pos[1]) == true) {
+  if (posOnApfel(powerup.pos[0], powerup.pos[1]) == true || posOnSnake(powerup.pos[0], powerup.pos[1]) == true || posOnPflaume(powerup.pos[0], powerup.pos[1], false) == true) {
     setPowerup();
   }
 }
@@ -440,8 +440,16 @@ function posOnSnake(x, y) {
   return false;
 }
 
-function posOnPflaume(x, y) {
-  for (var t = 0; t < pflaumenPoses.length - 1; t++) {
+function posOnPflaume(x, y, whichCondition) {
+  var condition;
+  //whichCondition == true => pflaumenPoses.length-1
+  if (whichCondition == true) {
+    condition = pflaumenPoses.length - 1;
+  } else {
+    condition = pflaumenPoses.length;
+  }
+
+  for (var t = 0; t < condition; t++) {
     if (pflaumenPoses[t][0] == x && pflaumenPoses[t][1] == y) {
       return true;
     }
