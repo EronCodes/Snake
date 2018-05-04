@@ -3,6 +3,7 @@ document.getElementById("startButton").addEventListener("click", spielStarten);
 document.getElementById("expert").addEventListener("click", openExpert);
 document.getElementById("close").addEventListener("click", closeExpert);
 document.getElementById("pause").addEventListener("click", pause);
+document.getElementById("powerup").addEventListener("click", setPflaumeSteigt);
 
 initCss();
 
@@ -385,6 +386,12 @@ function addPflaume(k) {
   //Liegt Snakes Kopf auf Anfangsposition?                                                                                                 //Liegt dort die Pflaume?
   if ((snake.besetzteFelder[snake.besetzteFelder.length - 1][0] == 3 && snake.besetzteFelder[snake.besetzteFelder.length - 1][1] == 0) && (pflaumenPoses[k][0] == 4 && pflaumenPoses[k][1] == 0)) {
     addPflaume(k);
+  }
+}
+
+function setPflaumeSteigt() {
+  if (document.getElementById("powerup").checked) {
+    document.getElementById("pflaumenAdd").checked = true;
   }
 }
 
