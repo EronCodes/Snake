@@ -101,6 +101,9 @@ function tabelleErstellen() {
     }
     tabelle.appendChild(tr);
   }
+
+  tabelle.style.marginLeft = tabelle.offsetWidth/-2 + "px";
+  tabelle.style.marginTop = tabelle.offsetHeight/-2 + "px";
 }
 
 function setupGrafik() {
