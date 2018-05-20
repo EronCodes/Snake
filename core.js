@@ -108,6 +108,7 @@ function setupGrafik() {
   var zellen = document.getElementsByTagName("td");
   for (var i = 0; i < zellen.length; i++) {
     zellen[i].style.backgroundColor = "#0a0";
+    zellen[i].style.borderRadius = "0";
     zellen[i].innerHTML = "";
   }
 
@@ -141,6 +142,30 @@ function setupGrafik() {
     var id = snake.besetzteFelder[k];
     var feld = document.getElementById(id[0] + "_" + id[1]);
     feld.style.backgroundColor = "#00f";
+  }
+
+  //Runde die Ecken von Snakes Schwanz ab
+  var schwanz = document.getElementById(snake.besetzteFelder[0][0] + "_" + snake.besetzteFelder[0][1])
+  //In welche Richtung geht der Schwanz?
+  //  x =                                                         y<
+  if (snake.besetzteFelder[1][0] == snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] < snake.besetzteFelder[0][1]) {
+    //oben
+    schwanz.style.borderRadius = "0 0 10px 10px";
+  }
+  //  x =                                                         y >
+  if (snake.besetzteFelder[1][0] == snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] > snake.besetzteFelder[0][1]) {
+    //unten
+    schwanz.style.borderRadius = "10px 10px 0 0";
+  }
+  //  x<                                                          y=
+  if (snake.besetzteFelder[1][0] < snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] == snake.besetzteFelder[0][1]) {
+    //links
+    schwanz.style.borderRadius = "0 10px 10px 0";
+  }
+  // x>                                                          y=
+  if (snake.besetzteFelder[1][0] > snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] == snake.besetzteFelder[0][1]) {
+    //rechts
+    schwanz.style.borderRadius = "10px 0 0 10px";
   }
 
   //Zeichne Snakes Kopf
