@@ -451,11 +451,11 @@ function deletePowerup() {
 function pause() {
   if (paused == false) {
     clearInterval(intervalId);
-    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/play.svg" width="30">';
+    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/play.svg" width="50">';
     paused = true;
   } else {
     paused = false;
-    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/pause.svg" width="30">';
+    document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/pause.svg" width="50">';
     geschwindigkeit = document.getElementById("geschwindigkeit_start").value;
     intervalId = setInterval(setupBewegungswerte, geschwindigkeit);
   }
@@ -463,11 +463,11 @@ function pause() {
 
 function sound() {
   if (sounds.status == false) {
-    document.getElementById("sounds").innerHTML = '<img alt="Sounds on" src="images/audio_on.svg" width="30">';
+    document.getElementById("sounds").innerHTML = '<img alt="Sounds on" src="images/audio_on.svg" width="50">';
     sounds.status = true;
   } else {
     sounds.status = false;
-    document.getElementById("sounds").innerHTML = '<img alt="Sounds off" src="images/audio_off.svg" width="30">';
+    document.getElementById("sounds").innerHTML = '<img alt="Sounds off" src="images/audio_off.svg" width="50">';
   }
 }
 

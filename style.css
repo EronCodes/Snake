@@ -146,6 +146,8 @@ noscript {
   right: 20px;
   padding: 0;
   display: none;
+  border: 0;
+  background-color: #fff;
 }
 
 #pause {
@@ -153,7 +155,7 @@ noscript {
 }
 
 #sounds {
-  top: 70px;
+  top: 75px;
 }
 
 #pause img, #sounds img {
