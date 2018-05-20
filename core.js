@@ -3,6 +3,7 @@ document.getElementById("startButton").addEventListener("click", spielStarten);
 document.getElementById("expert").addEventListener("click", openExpert);
 document.getElementById("close").addEventListener("click", closeExpert);
 document.getElementById("pause").addEventListener("click", pause);
+document.getElementById("sounds").addEventListener("click", sound);
 document.getElementById("powerup").addEventListener("click", setPflaumeSteigt);
 document.getElementById("pflaumenAdd").addEventListener("click", setPowerupUnchecked);
 
@@ -75,6 +76,7 @@ function spielStarten() {
   document.getElementById("endDiv").style.display = "none";
   document.getElementById("gameSettings").style.display = "none";
   document.getElementById("pause").style.display = "block";
+  document.getElementById("sounds").style.display = "block";
 
   snake.orientation = 1;
 
@@ -263,6 +265,9 @@ function setupBewegungswerte() {
     if ((snake.besetzteFelder[k][0] == snake.fruchtPos[0]) && (snake.besetzteFelder[k][1] == snake.fruchtPos[1])) {
       snake.gefressen = true;
       aepfel++;
+      if (sounds.status == true) {
+        sounds.eat.play();
+      }
       if (powerup.inGame == false) {
         powerup.waiting--;
       }
@@ -277,10 +282,14 @@ function setupBewegungswerte() {
     }
   }
 
-  if (todesPruefung())
+  if (todesPruefung()) {
+    if (sounds.status == true) {
+      sounds.die.play();
+    }
     spielBeenden();
-  else
+  } else {
     setupGrafik();
+  }
 }
 
 //End of Game
@@ -438,7 +447,7 @@ function deletePowerup() {
   powerup.waiting = Math.floor(Math.random() * 5) + 10;
 }
 
-//Expert-Window-Functions and the pause-funktion
+//Expert-Window-Functions and the pause/sound-funktion
 function pause() {
   if (paused == false) {
     clearInterval(intervalId);
@@ -449,6 +458,16 @@ function pause() {
     document.getElementById("pause").innerHTML = '<img alt="Pause" src="images/pause.svg" width="30">';
     geschwindigkeit = document.getElementById("geschwindigkeit_start").value;
     intervalId = setInterval(setupBewegungswerte, geschwindigkeit);
+  }
+}
+
+function sound() {
+  if (sounds.status == false) {
+    document.getElementById("sounds").innerHTML = '<img alt="Sounds on" src="images/audio_on.svg" width="30">';
+    sounds.status = true;
+  } else {
+    sounds.status = false;
+    document.getElementById("sounds").innerHTML = '<img alt="Sounds off" src="images/audio_off.svg" width="30">';
   }
 }
 

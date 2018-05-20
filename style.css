@@ -141,25 +141,29 @@ noscript {
   z-index: 300;
 }
 
-#pause {
+#pause, #sounds, #counter {
   position: fixed;
   right: 20px;
-  top: 20px;
   padding: 0;
   display: none;
 }
 
-#pause img {
+#pause {
+  top: 20px;
+}
+
+#sounds {
+  top: 70px;
+}
+
+#pause img, #sounds img {
   margin: 0;
   padding: 0;
 }
 
 #counter {
-  position: fixed;
-  right: 20px;
-  top: 70px;
+  top: 120px;
   font-size: 1.5rem;
-  display: none;
 }
 
 #counter img {

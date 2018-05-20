@@ -35,3 +35,9 @@ var powerup = {
   timeLeft: 100,
   pos: [5,5]
 };
+
+var sounds = {
+  die: new Audio("sounds/die.mp3"),
+  eat: new Audio("sounds/eat.mp3"),
+  status: true
+};
