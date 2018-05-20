@@ -147,25 +147,21 @@ function setupGrafik() {
   }
 
   //Runde die Ecken von Snakes Schwanz ab
-  var schwanz = document.getElementById(snake.besetzteFelder[0][0] + "_" + snake.besetzteFelder[0][1])
+  var schwanz = document.getElementById(snake.besetzteFelder[0][0] + "_" + snake.besetzteFelder[0][1]);
   //In welche Richtung geht der Schwanz?
-  //  x =                                                         y<
-  if (snake.besetzteFelder[1][0] == snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] < snake.besetzteFelder[0][1]) {
+  if (direction(snake.besetzteFelder[0], snake.besetzteFelder[1]) == 0) {
     //oben
     schwanz.style.borderRadius = "0 0 10px 10px";
   }
-  //  x =                                                         y >
-  if (snake.besetzteFelder[1][0] == snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] > snake.besetzteFelder[0][1]) {
+  if (direction(snake.besetzteFelder[0], snake.besetzteFelder[1]) == 2) {
     //unten
     schwanz.style.borderRadius = "10px 10px 0 0";
   }
-  //  x<                                                          y=
-  if (snake.besetzteFelder[1][0] < snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] == snake.besetzteFelder[0][1]) {
+  if (direction(snake.besetzteFelder[0], snake.besetzteFelder[1]) == 3) {
     //links
     schwanz.style.borderRadius = "0 10px 10px 0";
   }
-  // x>                                                          y=
-  if (snake.besetzteFelder[1][0] > snake.besetzteFelder[0][0] && snake.besetzteFelder[1][1] == snake.besetzteFelder[0][1]) {
+  if (direction(snake.besetzteFelder[0], snake.besetzteFelder[1]) == 1) {
     //rechts
     schwanz.style.borderRadius = "10px 0 0 10px";
   }
@@ -182,16 +178,24 @@ function tasteGedrueckt(event) {
   if (paused == false) {
     switch (event.keyCode) {
       case 37: //links
-        snake.orientation = 3;
+        if (direction(snake.besetzteFelder[snake.besetzteFelder.length-2], snake.besetzteFelder[snake.besetzteFelder.length-1]) != 1) {
+          snake.orientation = 3;
+        }
         break;
       case 38: //oben
-        snake.orientation = 0;
+        if (direction(snake.besetzteFelder[snake.besetzteFelder.length-2], snake.besetzteFelder[snake.besetzteFelder.length-1]) != 2) {
+          snake.orientation = 0;
+        }
         break;
       case 39: //rechts
-        snake.orientation = 1;
+        if (direction(snake.besetzteFelder[snake.besetzteFelder.length-2], snake.besetzteFelder[snake.besetzteFelder.length-1]) != 3) {
+          snake.orientation = 1;
+        }
         break;
       case 40: //unten
-        snake.orientation = 2;
+        if (direction(snake.besetzteFelder[snake.besetzteFelder.length-2], snake.besetzteFelder[snake.besetzteFelder.length-1]) != 0) {
+          snake.orientation = 2;
+        }
         break;
     }
   }
@@ -477,6 +481,33 @@ function closeExpert() {
 
 function openExpert() {
   document.getElementById("gameSettings").style.display = "block";
+}
+
+                // // XXX:
+function direction(point1, point2) {
+  //return values:
+  /*
+    0: oben
+    1: rechts
+    2: unten
+    3: links
+  */
+  if (point2[0] == point1[0] && point2[1] < point1[1]) {
+    //oben
+    return 0;
+  }
+  if (point2[0] == point1[0] && point2[1] > point1[1]) {
+    //unten
+    return 2;
+  }
+  if (point2[0] < point1[0] && point2[1] == point1[1]) {
+    //links
+    return 3;
+  }
+  if (point2[0] > point1[0] && point2[1] == point1[1]) {
+    //rechts
+    return 1;
+  }
 }
 
 //posOn... - functions
