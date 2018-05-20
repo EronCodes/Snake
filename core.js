@@ -123,8 +123,6 @@ function setupGrafik() {
 
   //Hat Snake einen Apfel gefressen?
   if (snake.gefressen == true) {
-    var apfel = document.getElementById(snake.fruchtPos[0] + "_" + snake.fruchtPos[1]);
-    apfel.style.backgroundColor = "#00f";
     document.getElementById("counter").innerHTML = aepfel + ' <img src="images/apple.svg" alt="Äpfel" width="50">';
   }
 
