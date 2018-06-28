@@ -200,7 +200,7 @@ function tasteGedrueckt(event) {
     }
   }
 
-  if (event.keyCode == 13) {
+  if (event.keyCode == 13 && !todesPruefung()) {
     pause();
   }
 
